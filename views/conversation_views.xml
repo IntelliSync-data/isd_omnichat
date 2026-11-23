@@ -28,6 +28,8 @@
             <form string="Conversation" create="0">
                 <header>
                     <button name="action_open_inbox" type="object" string="Open in Inbox" class="btn-primary"/>
+                    <button name="action_refresh_profile" type="object" string="Refresh Name &amp; Avatar"
+                            help="Ask the platform again for the customer's name and avatar"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
@@ -50,6 +52,8 @@
                             <field name="external_user_id" groups="isd_omnichat.group_omnichat_manager"/>
                             <field name="external_conversation_id" groups="isd_omnichat.group_omnichat_manager"
                                    invisible="not external_conversation_id"/>
+                            <field name="profile_error" groups="isd_omnichat.group_omnichat_manager"
+                                   invisible="not profile_error" class="text-danger"/>
                         </group>
                     </group>
                     <notebook>

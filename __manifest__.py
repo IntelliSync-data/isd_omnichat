@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Omnichat (by ISD)',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'category': 'ISD Modules',
     'summary': 'One inbox for Zalo OA, Facebook pages, WhatsApp, Telegram, Shopee and TikTok Shop, '
                'with quick replies, AI auto-reply and handoff to a person',

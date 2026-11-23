@@ -163,6 +163,8 @@
                         <div class="o_oc_chat_who">
                             <div class="d-flex align-items-center gap-2 flex-wrap">
                                 <a href="#" class="o_oc_chat_name" t-on-click.prevent="rename" title="Rename" t-esc="conv.name"/>
+                                <a t-if="conv.profile_pending" href="#" class="text-muted small" title="Get the name and avatar from the platform again"
+                                   t-on-click.prevent="() => this.callConv('action_refresh_profile')"><i class="fa fa-refresh"/></a>
                                 <t t-foreach="conv.tags" t-as="tag" t-key="tag.id">
                                     <span t-attf-class="o_oc_chip o_tag_color_{{ tag.color }}" t-esc="tag.name"/>
                                 </t>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-23 02:08+0000\n"
-"PO-Revision-Date: 2026-11-23 02:08+0000\n"
+"POT-Creation-Date: 2026-11-23 12:38+0000\n"
+"PO-Revision-Date: 2026-11-23 12:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,9 @@ msgstr "%(name)s (%(account)s)"
 msgid ""
 "A Zalo OA, a Facebook page, a WhatsApp number, a Telegram bot, a Shopee or "
 "TikTok shop."
-msgstr "Một Zalo OA, một Fanpage Facebook, một số WhatsApp, một bot Telegram, một shop Shopee hoặc TikTok."
+msgstr ""
+"Một Zalo OA, một Fanpage Facebook, một số WhatsApp, một bot Telegram, một "
+"shop Shopee hoặc TikTok."
 
 #. module: isd_omnichat
 #. odoo-python
@@ -227,6 +229,11 @@ msgid "Archived: stops receiving messages"
 msgstr "Lưu trữ: ngừng nhận tin"
 
 #. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_form
+msgid "Ask the platform again for the customer's name and avatar"
+msgstr "Hỏi lại nền tảng tên và ảnh đại diện của khách"
+
+#. module: isd_omnichat
 #. odoo-javascript
 #: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
 msgid "Assign"
@@ -367,6 +374,12 @@ msgstr "Số hội thoại"
 #: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_list
 msgid "Conversations"
 msgstr "Hội thoại"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "Could not get the profile: %s"
+msgstr "Không lấy được thông tin khách: %s"
 
 #. module: isd_omnichat
 #: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__create_uid
@@ -560,6 +573,12 @@ msgid "From IP"
 msgstr "Từ IP"
 
 #. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Get the name and avatar from the platform again"
+msgstr "Lấy lại tên và ảnh đại diện từ nền tảng"
+
+#. module: isd_omnichat
 #: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__handoff_message
 msgid "Handoff Reply"
 msgstr "Câu trả lời khi chuyển nhân viên"
@@ -649,7 +668,9 @@ msgstr "Cài CRM để tạo lead."
 msgid ""
 "Its conversations and messages are deleted too. To keep them, hide or "
 "archive the account instead."
-msgstr "Toàn bộ hội thoại và tin nhắn của tài khoản cũng bị xoá. Muốn giữ lại thì hãy ẩn hoặc lưu trữ tài khoản."
+msgstr ""
+"Toàn bộ hội thoại và tin nhắn của tài khoản cũng bị xoá. Muốn giữ lại thì "
+"hãy ẩn hoặc lưu trữ tài khoản."
 
 #. module: isd_omnichat
 #: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__last_inbound_at
@@ -756,7 +777,8 @@ msgstr "Chế độ"
 msgid ""
 "More than 24 hours since the customer last wrote: the platform may refuse a "
 "reply."
-msgstr "Đã quá 24 giờ từ tin cuối của khách: nền tảng có thể từ chối tin trả lời."
+msgstr ""
+"Đã quá 24 giờ từ tin cuối của khách: nền tảng có thể từ chối tin trả lời."
 
 #. module: isd_omnichat
 #: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__name
@@ -786,7 +808,9 @@ msgstr "Tài khoản kênh mới"
 msgid ""
 "New conversations are answered by AI Chatbot until the customer asks for a "
 "person or an agent replies"
-msgstr "Hội thoại mới do AI Chatbot trả lời cho đến khi khách xin gặp người hoặc nhân viên nhắn vào"
+msgstr ""
+"Hội thoại mới do AI Chatbot trả lời cho đến khi khách xin gặp người hoặc "
+"nhân viên nhắn vào"
 
 #. module: isd_omnichat
 #. odoo-javascript
@@ -1108,6 +1132,21 @@ msgid "Processed"
 msgstr "Đã xử lý"
 
 #. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__profile_checked_at
+msgid "Profile Checked At"
+msgstr "Lần lấy thông tin gần nhất"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__profile_error
+msgid "Profile Error"
+msgstr "Lỗi lấy thông tin khách"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__profile_pending
+msgid "Profile Pending"
+msgstr "Chưa có tên thật"
+
+#. module: isd_omnichat
 #. odoo-javascript
 #: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
 msgid "QUICK REPLIES (type \\ to open)"
@@ -1136,6 +1175,11 @@ msgstr "Tin nhắn mẫu"
 #: model_terms:ir.ui.view,arch_db:isd_omnichat.view_webhook_log_list
 msgid "Received"
 msgstr "Đã nhận"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_form
+msgid "Refresh Name & Avatar"
+msgstr "Lấy lại tên & ảnh"
 
 #. module: isd_omnichat
 #: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__refresh_token
@@ -1224,7 +1268,8 @@ msgstr "Đã gửi"
 #: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__away_message
 msgid ""
 "Sent instead of an AI answer when AI cannot answer (no credit, an error)"
-msgstr "Gửi thay câu trả lời của AI khi AI không trả lời được (hết credit, lỗi)"
+msgstr ""
+"Gửi thay câu trả lời của AI khi AI không trả lời được (hết credit, lỗi)"
 
 #. module: isd_omnichat
 #: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__sequence
@@ -1280,7 +1325,8 @@ msgstr "Shopee"
 #: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__api_host
 msgid ""
 "Shopee only: leave empty for the live API, or the test host while testing"
-msgstr "Chỉ cho Shopee: để trống để dùng API thật, hoặc nhập host test khi đang thử"
+msgstr ""
+"Chỉ cho Shopee: để trống để dùng API thật, hoặc nhập host test khi đang thử"
 
 #. module: isd_omnichat
 #: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__shortcut
@@ -1381,7 +1427,9 @@ msgstr "Văn bản"
 msgid ""
 "The button under AI replies. Typing it, or asking for a person, hands the "
 "conversation to an agent."
-msgstr "Nút dưới câu trả lời của AI. Khách bấm nút, gõ đúng chữ này hoặc xin gặp người thì hội thoại chuyển cho nhân viên."
+msgstr ""
+"Nút dưới câu trả lời của AI. Khách bấm nút, gõ đúng chữ này hoặc xin gặp "
+"người thì hội thoại chuyển cho nhân viên."
 
 #. module: isd_omnichat
 #. odoo-python
@@ -1406,9 +1454,22 @@ msgid "The name agents see, e.g. \"Zalo Kinh Doanh 1\""
 msgstr "Tên nhân viên nhìn thấy, ví dụ \"Zalo Kinh Doanh 1\""
 
 #. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_conversation__profile_pending
+msgid ""
+"The name is still the placeholder \"Customer 1234\": try the platform "
+"profile again on the next message"
+msgstr "Tên vẫn là tên tạm \"Khách hàng 1234\": tin tiếp theo sẽ thử lấy lại thông tin từ nền tảng"
+
+#. module: isd_omnichat
 #: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
 msgid "The old address stops working. Continue?"
 msgstr "Địa chỉ cũ sẽ ngừng hoạt động. Tiếp tục?"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "The platform did not return a name"
+msgstr "Nền tảng không trả về tên"
 
 #. module: isd_omnichat
 #. odoo-python
@@ -1421,7 +1482,8 @@ msgstr "Phím tắt \\%s đã được dùng."
 #: code:addons/isd_omnichat/models/account.py:0
 msgid ""
 "The token could not be renewed. Check the app credentials and refresh token."
-msgstr "Không làm mới được token. Kiểm tra lại thông tin app và refresh token."
+msgstr ""
+"Không làm mới được token. Kiểm tra lại thông tin app và refresh token."
 
 #. module: isd_omnichat
 #: model:ir.model.constraint,message:isd_omnichat.constraint_omnichat_account_webhook_token_unique
@@ -1533,7 +1595,9 @@ msgstr "Webhook URL"
 #: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
 msgid ""
 "Webhook settings of the Zalo app: checks that each event comes from Zalo"
-msgstr "Trong phần Webhook của app Zalo: dùng để kiểm tra sự kiện đúng là do Zalo gửi"
+msgstr ""
+"Trong phần Webhook của app Zalo: dùng để kiểm tra sự kiện đúng là do Zalo "
+"gửi"
 
 #. module: isd_omnichat
 #: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__platform__whatsapp
@@ -1549,6 +1613,11 @@ msgstr "Khi AI không trả lời được"
 #: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__user_ids
 msgid "Who sees and answers this account. Managers see every account."
 msgstr "Ai thấy và trả lời tài khoản này. Quản lý thấy mọi tài khoản."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_conversation__profile_error
+msgid "Why the platform did not give the customer name and avatar"
+msgstr "Lý do nền tảng không trả tên và ảnh đại diện của khách"
 
 #. module: isd_omnichat
 #. odoo-python

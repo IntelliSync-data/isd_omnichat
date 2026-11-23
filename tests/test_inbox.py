@@ -2,6 +2,7 @@
 import base64
 import hashlib
 import json
+from datetime import timedelta
 
 from unittest.mock import patch
 
@@ -38,6 +39,38 @@ class TestInbox(OmnichatCase):
         self.assertEqual(conv.message_ids.mapped('body'), ['Chào shop', 'Còn hàng?'], 'a redelivery is skipped')
         self.assertEqual((conv.unread_count, conv.state, conv.mode), (2, 'new', 'human'))
         self.assertEqual(conv.last_message_preview, 'Còn hàng?')
+
+    def test_profile_is_retried_when_the_platform_refuses(self):
+        with self.network() as net:
+            net.on('/message/cs', FakeResponse({'error': 0, 'data': {'message_id': 'x'}}))
+            net.on('/oa/user/detail', FakeResponse({'error': -201, 'message': 'no permission'}))
+            self.receive(self.zalo, [providers.event('message', user_id='u9477', text='Hi', msg_id='p1')])
+        conv = self.Conversation.search([('account_id', '=', self.zalo.id), ('external_user_id', '=', 'u9477')])
+        self.assertEqual(conv.name, 'Customer 9477')
+        self.assertTrue(conv.profile_pending)
+        self.assertIn('-201', conv.profile_error)
+        with self.network() as net:
+            self.zalo_ok(net)
+            self.receive(self.zalo, [providers.event('message', user_id='u9477', text='Hi again', msg_id='p2')])
+            self.assertFalse(net.sent('/oa/user/detail'), 'not asked again within 10 minutes')
+            conv.profile_checked_at = conv.profile_checked_at - timedelta(minutes=11)
+            self.receive(self.zalo, [providers.event('message', user_id='u9477', text='Hello?', msg_id='p3')])
+        self.assertEqual(conv.name, 'Anh Minh Hoàng', 'the next message after the pause brings the name')
+        self.assertFalse(conv.profile_pending or conv.profile_error)
+
+    def test_refresh_profile_button_and_rename(self):
+        with self.network() as net:
+            net.on('/oa/user/detail', FakeResponse({'error': -201, 'message': 'no permission'}))
+            self.receive(self.zalo, [providers.event('message', user_id='u42', text='Hi', msg_id='r1')])
+            conv = self.Conversation.search([('external_user_id', '=', 'u42')])
+            with self.assertRaises(UserError):
+                conv.with_user(self.agent).action_refresh_profile()
+            self.zalo_ok(net)
+            conv.with_user(self.agent).action_refresh_profile()
+        self.assertEqual(conv.name, 'Anh Minh Hoàng')
+        conv.profile_pending = True
+        conv.with_user(self.agent).action_rename('Chị Lan')
+        self.assertFalse(conv.profile_pending, 'a name typed by an agent stays')
 
     def test_attachments_are_downloaded(self):
         with self.network() as net:

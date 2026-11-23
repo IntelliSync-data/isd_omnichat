@@ -14,6 +14,7 @@ from ..services.providers import HANDOFF_PAYLOAD
 _logger = logging.getLogger(__name__)
 
 MAX_DOWNLOAD = 20 * 1024 * 1024
+PROFILE_RETRY = timedelta(minutes=10)
 AVATAR_COLORS = ['#2563EB', '#16A34A', '#9333EA', '#EA580C', '#0891B2', '#DB2777', '#4F46E5', '#CA8A04']
 AI_SOURCES = {'zalo': 'zalo', 'facebook': 'facebook'}
 # Asking for a person, on top of the "Talk to a person" button and AI Chatbot's own phrases
@@ -63,6 +64,12 @@ class OmnichatConversation(models.Model):
     last_direction = fields.Selection([('in', 'Received'), ('out', 'Sent')])
     unread_count = fields.Integer(default=0)
     crm_lead_id = fields.Integer(string='CRM Lead', copy=False)
+    profile_pending = fields.Boolean(
+        default=False, copy=False,
+        help='The name is still the placeholder "Customer 1234": try the platform profile again on the next message')
+    profile_checked_at = fields.Datetime(copy=False)
+    profile_error = fields.Char(string='Profile Error', copy=False,
+                                help='Why the platform did not give the customer name and avatar')
     initials = fields.Char(compute='_compute_initials')
     color = fields.Char(compute='_compute_initials')
 
@@ -124,33 +131,69 @@ class OmnichatConversation(models.Model):
             updates = {}
             if ev.get('conversation_ref') and conv.external_conversation_id != ev['conversation_ref']:
                 updates['external_conversation_id'] = ev['conversation_ref']
-            if ev.get('name') and conv.name in (_('Customer'), 'Customer'):
-                updates['name'] = ev['name']
+            if ev.get('name') and conv.profile_pending:
+                updates.update(name=ev['name'], profile_pending=False, profile_error=False)
             if ev.get('phone') and not conv.phone:
                 updates['phone'] = ev['phone']
             if updates:
                 conv.write(updates)
+            if conv.profile_pending and ev['kind'] != 'echo':
+                last = conv.profile_checked_at
+                if not last or fields.Datetime.now() - last > PROFILE_RETRY:
+                    conv._omni_load_profile()
             return conv
-        profile = {'name': ev.get('name'), 'avatar_url': ev.get('avatar_url')}
-        if not profile['name'] and ev['kind'] != 'echo':
-            try:
-                profile.update({k: v for k, v in account._provider().fetch_profile(ev['user_id']).items() if v})
-            except Exception as error:  # noqa: BLE001 - a missing name never blocks a message
-                _logger.info('isd_omnichat: no profile for %s on %s: %s', ev['user_id'], account.name, error)
         values = {
             'account_id': account.id,
             'external_user_id': ev['user_id'],
             'external_conversation_id': ev.get('conversation_ref') or False,
-            'name': profile.get('name') or '%s %s' % (_('Customer'), ev['user_id'][-4:]),
+            'name': ev.get('name') or '%s %s' % (_('Customer'), ev['user_id'][-4:]),
+            'profile_pending': not ev.get('name'),
             'phone': ev.get('phone') or False,
             'mode': 'ai' if account.ai_enabled and account.ai_available else 'human',
         }
-        image = self._omni_fetch_image(profile.get('avatar_url'))
+        image = self._omni_fetch_image(ev.get('avatar_url'))
         if image:
             values['image_128'] = image
         if values['phone']:
             values['partner_id'] = self._omni_find_partner(values['phone']).id or False
-        return self.sudo().create(values)
+        conv = self.sudo().create(values)
+        if conv.profile_pending and ev['kind'] != 'echo':
+            conv._omni_load_profile()
+        return conv
+
+    def _omni_load_profile(self):
+        """Ask the platform for the customer's name and avatar. A missing name never blocks a message."""
+        self.ensure_one()
+        conv = self.sudo()
+        values = {'profile_checked_at': fields.Datetime.now()}
+        try:
+            profile = conv.account_id._provider().fetch_profile(conv.external_user_id) or {}
+        except Exception as error:  # noqa: BLE001
+            _logger.warning('isd_omnichat: no profile for %s on %s: %s',
+                            conv.external_user_id, conv.account_id.name, error)
+            values['profile_error'] = str(error)[:500]
+            conv.write(values)
+            return False
+        if not profile.get('name'):
+            values['profile_error'] = _('The platform did not return a name')
+            conv.write(values)
+            return False
+        values.update(name=profile['name'], profile_pending=False, profile_error=False)
+        image = self._omni_fetch_image(profile.get('avatar_url'))
+        if image:
+            values['image_128'] = image
+        conv.write(values)
+        return True
+
+    def action_refresh_profile(self):
+        """Button: fetch the name and avatar again, even after a rename."""
+        self.check_access('write')
+        for conv in self:
+            conv.sudo().profile_pending = True
+            if not conv._omni_load_profile():
+                raise UserError(_('Could not get the profile: %s', conv.sudo().profile_error))
+            conv._omni_notify()
+        return True
 
     @api.model
     def _omni_fetch_image(self, url):
@@ -380,6 +423,7 @@ class OmnichatConversation(models.Model):
             'initials': self.initials,
             'color': self.color,
             'has_avatar': bool(self.image_128),
+            'profile_pending': self.profile_pending,
             'account_id': self.account_id.id,
             'account_name': self.account_id.name,
             'platform': self.platform,
@@ -526,7 +570,8 @@ class OmnichatConversation(models.Model):
     def action_rename(self, name):
         self.check_access('write')
         if name and name.strip():
-            self.write({'name': name.strip()})
+            # A name typed by an agent is never replaced by the platform profile
+            self.write({'name': name.strip(), 'profile_pending': False})
         return True
 
     def action_link_partner(self):
