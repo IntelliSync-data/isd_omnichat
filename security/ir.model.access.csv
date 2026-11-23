@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_agent,account agent,model_omnichat_account,group_omnichat_agent,1,0,0,0
+access_account_manager,account manager,model_omnichat_account,group_omnichat_manager,1,1,1,1
+access_conversation_agent,conversation agent,model_omnichat_conversation,group_omnichat_agent,1,1,0,0
+access_conversation_manager,conversation manager,model_omnichat_conversation,group_omnichat_manager,1,1,1,1
+access_message_agent,message agent,model_omnichat_message,group_omnichat_agent,1,0,1,0
+access_message_manager,message manager,model_omnichat_message,group_omnichat_manager,1,1,1,1
+access_quick_reply_agent,quick reply agent,model_omnichat_quick_reply,group_omnichat_agent,1,1,1,1
+access_tag_agent,tag agent,model_omnichat_tag,group_omnichat_agent,1,0,0,0
+access_tag_manager,tag manager,model_omnichat_tag,group_omnichat_manager,1,1,1,1
+access_webhook_log_manager,webhook log manager,model_omnichat_webhook_log,group_omnichat_manager,1,0,0,1

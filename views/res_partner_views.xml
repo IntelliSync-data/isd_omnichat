@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_omnichat" model="ir.ui.view">
+        <field name="name">res.partner.form.omnichat</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_omnichat" type="object" class="oe_stat_button" icon="fa-comments"
+                        groups="isd_omnichat.group_omnichat_agent" invisible="not omnichat_conversation_count">
+                    <field name="omnichat_conversation_count" widget="statinfo" string="Chats"/>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

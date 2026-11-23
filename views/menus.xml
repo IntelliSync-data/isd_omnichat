@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_root" name="Omnichat" sequence="45" web_icon="isd_omnichat,static/description/icon.png"
+              groups="isd_omnichat.group_omnichat_agent"/>
+    <menuitem id="menu_inbox" name="Inbox" parent="menu_root" sequence="10" action="action_inbox"/>
+    <menuitem id="menu_conversations" name="Conversations" parent="menu_root" sequence="20" action="action_conversation"/>
+    <menuitem id="menu_quick_replies" name="Quick Replies" parent="menu_root" sequence="30" action="action_quick_reply"/>
+    <menuitem id="menu_config" name="Configuration" parent="menu_root" sequence="100"
+              groups="isd_omnichat.group_omnichat_manager"/>
+    <menuitem id="menu_accounts" name="Channel Accounts" parent="menu_config" sequence="10" action="action_account"/>
+    <menuitem id="menu_tags" name="Tags" parent="menu_config" sequence="20" action="action_tag"/>
+    <menuitem id="menu_webhook_logs" name="Webhook Logs" parent="menu_config" sequence="30" action="action_webhook_log"/>
+</odoo>

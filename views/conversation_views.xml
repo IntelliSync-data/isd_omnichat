@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_conversation_list" model="ir.ui.view">
+        <field name="name">omnichat.conversation.list</field>
+        <field name="model">omnichat.conversation</field>
+        <field name="arch" type="xml">
+            <list string="Conversations" create="0" decoration-bf="unread_count &gt; 0">
+                <field name="last_message_at" string="Last Message"/>
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="last_message_preview" optional="show"/>
+                <field name="partner_id" optional="show"/>
+                <field name="phone" optional="hide"/>
+                <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
+                <field name="mode" optional="hide"/>
+                <field name="unread_count" optional="hide"/>
+                <field name="state" widget="badge" decoration-info="state == 'new'" decoration-success="state == 'done'"/>
+                <button name="action_open_inbox" type="object" icon="fa-comments" title="Open in the inbox"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_conversation_form" model="ir.ui.view">
+        <field name="name">omnichat.conversation.form</field>
+        <field name="model">omnichat.conversation</field>
+        <field name="arch" type="xml">
+            <form string="Conversation" create="0">
+                <header>
+                    <button name="action_open_inbox" type="object" string="Open in Inbox" class="btn-primary"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <field name="image_128" widget="image" class="oe_avatar" readonly="1"/>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <field name="account_id" readonly="1"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="phone"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        </group>
+                        <group>
+                            <field name="mode"/>
+                            <field name="last_message_at"/>
+                            <field name="last_inbound_at"/>
+                            <field name="external_user_id" groups="isd_omnichat.group_omnichat_manager"/>
+                            <field name="external_conversation_id" groups="isd_omnichat.group_omnichat_manager"
+                                   invisible="not external_conversation_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Messages" name="messages">
+                            <field name="message_ids" readonly="1">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="direction"/>
+                                    <field name="author_kind"/>
+                                    <field name="user_id" optional="hide"/>
+                                    <field name="body"/>
+                                    <field name="msg_type" optional="hide"/>
+                                    <field name="state" optional="show"/>
+                                    <field name="error" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_conversation_search" model="ir.ui.view">
+        <field name="name">omnichat.conversation.search</field>
+        <field name="model">omnichat.conversation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" filter_domain="['|', '|', ('name', 'ilike', self), ('phone', 'ilike', self), ('partner_id.name', 'ilike', self)]"/>
+                <field name="account_id"/>
+                <field name="tag_ids"/>
+                <field name="user_id"/>
+                <filter name="mine" string="Mine" domain="[('user_id', '=', uid)]"/>
+                <filter name="unread" string="Unread" domain="[('unread_count', '&gt;', 0)]"/>
+                <filter name="not_done" string="Not Done" domain="[('state', '!=', 'done')]"/>
+                <filter name="ai" string="Answered by AI" domain="[('mode', '=', 'ai')]"/>
+                <separator/>
+                <filter name="last_message_at" string="Last Message" date="last_message_at"/>
+                <group expand="0">
+                    <filter name="group_account" string="Account" context="{'group_by': 'account_id'}"/>
+                    <filter name="group_user" string="Assigned To" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_conversation" model="ir.actions.act_window">
+        <field name="name">Conversations</field>
+        <field name="res_model">omnichat.conversation</field>
+        <field name="path">omnichat-conversations</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_inbox" model="ir.actions.client">
+        <field name="name">Inbox</field>
+        <field name="tag">isd_omnichat.inbox</field>
+        <field name="path">omnichat</field>
+    </record>
+</odoo>

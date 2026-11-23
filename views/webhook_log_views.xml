@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_webhook_log_list" model="ir.ui.view">
+        <field name="name">omnichat.webhook.log.list</field>
+        <field name="model">omnichat.webhook.log</field>
+        <field name="arch" type="xml">
+            <list string="Webhook Logs" create="0" edit="0"
+                  decoration-danger="status in ('error', 'rejected')" decoration-muted="status == 'ignored'">
+                <field name="create_date" string="Received"/>
+                <field name="account_id"/>
+                <field name="status" widget="badge"/>
+                <field name="note"/>
+                <field name="remote_ip" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_webhook_log_form" model="ir.ui.view">
+        <field name="name">omnichat.webhook.log.form</field>
+        <field name="model">omnichat.webhook.log</field>
+        <field name="arch" type="xml">
+            <form string="Webhook Log" create="0" edit="0">
+                <sheet>
+                    <group>
+                        <field name="create_date" string="Received"/>
+                        <field name="account_id"/>
+                        <field name="status"/>
+                        <field name="note"/>
+                        <field name="remote_ip"/>
+                    </group>
+                    <field name="payload" widget="ace" options="{'mode': 'json'}"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_webhook_log_search" model="ir.ui.view">
+        <field name="name">omnichat.webhook.log.search</field>
+        <field name="model">omnichat.webhook.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="account_id"/>
+                <field name="note"/>
+                <filter name="problems" string="Errors and Rejected" domain="[('status', 'in', ('error', 'rejected'))]"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_webhook_log" model="ir.actions.act_window">
+        <field name="name">Webhook Logs</field>
+        <field name="res_model">omnichat.webhook.log</field>
+        <field name="path">omnichat-webhook-logs</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

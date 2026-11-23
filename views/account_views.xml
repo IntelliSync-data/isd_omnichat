@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_form" model="ir.ui.view">
+        <field name="name">omnichat.account.form</field>
+        <field name="model">omnichat.account</field>
+        <field name="arch" type="xml">
+            <form string="Channel Account">
+                <header>
+                    <button name="action_test_connection" type="object" string="Test Connection" class="btn-primary"/>
+                    <button name="action_refresh_token" type="object" string="Renew Token"
+                            invisible="platform not in ('zalo', 'shopee', 'tiktok')"/>
+                    <button name="action_open_seller_center" type="object" string="Seller Center" icon="fa-shopping-bag"
+                            invisible="platform not in ('shopee', 'tiktok')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,ok"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_conversations" type="object" class="oe_stat_button" icon="fa-comments">
+                            <field name="conversation_count" widget="statinfo" string="Conversations"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <widget name="web_ribbon" title="Hidden" bg_color="text-bg-warning" invisible="not hidden or not active"/>
+                    <field name="image_128" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Zalo Kinh Doanh 1"/></h1>
+                        <field name="platform" widget="radio" options="{'horizontal': true}"/>
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="state != 'error' or not last_error">
+                        <field name="last_error"/>
+                    </div>
+                    <group>
+                        <group string="Inbox">
+                            <field name="subtitle" placeholder="e.g. +84 909 888 999, @shop_bot"/>
+                            <field name="user_ids" widget="many2many_avatar_user"/>
+                            <field name="hidden"/>
+                            <field name="seller_center_url" widget="url" invisible="platform not in ('shopee', 'tiktok')"/>
+                            <field name="sequence"/>
+                            <field name="active" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Webhook">
+                            <div colspan="2" class="text-muted small mb-2">
+                                Paste this address into the platform's developer settings
+                                <span invisible="platform != 'telegram'">(Telegram: "Test Connection" registers it for you)</span>.
+                            </div>
+                            <field name="webhook_url" widget="CopyClipboardChar" string="Webhook URL"/>
+                            <button name="action_new_webhook_token" type="object" string="New Address" class="btn-link p-0"
+                                    colspan="2" confirm="The old address stops working. Continue?"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Connection" name="connection">
+                            <!-- Zalo OA -->
+                            <group invisible="platform != 'zalo'">
+                                <group>
+                                    <field name="app_id" string="Zalo App ID"/>
+                                    <field name="app_secret" string="App Secret Key" password="True"/>
+                                    <field name="webhook_secret" string="OA Secret Key" password="True"
+                                           help="Webhook settings of the Zalo app: checks that each event comes from Zalo"/>
+                                    <field name="external_id" string="OA ID"/>
+                                </group>
+                                <group>
+                                    <field name="access_token" string="OA Access Token" password="True"/>
+                                    <field name="refresh_token" string="Refresh Token" password="True"/>
+                                    <field name="token_expires_at" readonly="1"/>
+                                </group>
+                            </group>
+                            <!-- Facebook page -->
+                            <group invisible="platform != 'facebook'">
+                                <group>
+                                    <field name="external_id" string="Page ID"/>
+                                    <field name="access_token" string="Page Access Token" password="True"/>
+                                    <field name="app_id" string="Facebook App ID"
+                                           help="Messages this app sends come back as echoes; they are skipped"/>
+                                </group>
+                                <group>
+                                    <field name="app_secret" string="App Secret" password="True"/>
+                                    <field name="webhook_secret" string="Verify Token"
+                                           help="Any text: type the same in the Facebook app's webhook settings"/>
+                                </group>
+                            </group>
+                            <!-- WhatsApp Cloud API -->
+                            <group invisible="platform != 'whatsapp'">
+                                <group>
+                                    <field name="external_id" string="Phone Number ID"/>
+                                    <field name="access_token" string="Access Token" password="True"/>
+                                </group>
+                                <group>
+                                    <field name="app_secret" string="App Secret" password="True"/>
+                                    <field name="webhook_secret" string="Verify Token"/>
+                                </group>
+                            </group>
+                            <!-- Telegram bot -->
+                            <group invisible="platform != 'telegram'">
+                                <group>
+                                    <field name="access_token" string="Bot Token" password="True"
+                                           help="From @BotFather"/>
+                                    <field name="external_id" string="Bot ID" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="webhook_secret" string="Secret Token" readonly="1"/>
+                                </group>
+                            </group>
+                            <!-- Shopee -->
+                            <group invisible="platform != 'shopee'">
+                                <group>
+                                    <field name="app_id" string="Partner ID"/>
+                                    <field name="app_secret" string="Partner Key" password="True"/>
+                                    <field name="external_id" string="Shop ID"/>
+                                    <field name="api_host" placeholder="https://partner.shopeemobile.com"/>
+                                </group>
+                                <group>
+                                    <field name="access_token" string="Access Token" password="True"/>
+                                    <field name="refresh_token" string="Refresh Token" password="True"/>
+                                    <field name="token_expires_at" readonly="1"/>
+                                </group>
+                            </group>
+                            <!-- TikTok Shop -->
+                            <group invisible="platform != 'tiktok'">
+                                <group>
+                                    <field name="app_id" string="App Key"/>
+                                    <field name="app_secret" string="App Secret" password="True"/>
+                                    <field name="external_id" string="Shop ID"/>
+                                    <field name="shop_cipher"/>
+                                </group>
+                                <group>
+                                    <field name="access_token" string="Access Token" password="True"/>
+                                    <field name="refresh_token" string="Refresh Token" password="True"/>
+                                    <field name="token_expires_at" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="AI Auto-Reply" name="ai">
+                            <div class="alert alert-info" role="alert" invisible="ai_available">
+                                Install AI Chatbot (by ISD) to let AI answer new conversations.
+                            </div>
+                            <group>
+                                <field name="ai_available" invisible="1"/>
+                                <field name="ai_enabled" readonly="not ai_available"/>
+                                <field name="handoff_label" invisible="not ai_enabled"/>
+                                <field name="handoff_message" invisible="not ai_enabled"/>
+                                <field name="away_message" invisible="not ai_enabled"/>
+                            </group>
+                            <div class="text-muted" invisible="not ai_enabled">
+                                AI answers until the customer taps the button or asks for a person, or an agent replies.
+                                A conversation marked Done goes back to AI with the customer's next message.
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_list" model="ir.ui.view">
+        <field name="name">omnichat.account.list</field>
+        <field name="model">omnichat.account</field>
+        <field name="arch" type="xml">
+            <list string="Channel Accounts" decoration-muted="hidden" decoration-danger="state == 'error'">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="platform"/>
+                <field name="subtitle" optional="show"/>
+                <field name="user_ids" widget="many2many_avatar_user" optional="show"/>
+                <field name="ai_enabled" optional="show"/>
+                <field name="hidden" optional="hide"/>
+                <field name="state" widget="badge" decoration-success="state == 'ok'" decoration-danger="state == 'error'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_account_search" model="ir.ui.view">
+        <field name="name">omnichat.account.search</field>
+        <field name="model">omnichat.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0">
+                    <filter name="group_platform" string="Platform" context="{'group_by': 'platform'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_account" model="ir.actions.act_window">
+        <field name="name">Channel Accounts</field>
+        <field name="res_model">omnichat.account</field>
+        <field name="path">omnichat-accounts</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Connect a first account</p>
+            <p>A Zalo OA, a Facebook page, a WhatsApp number, a Telegram bot, a Shopee or TikTok shop.</p>
+        </field>
+    </record>
+</odoo>

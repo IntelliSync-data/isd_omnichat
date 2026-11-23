@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="isd_omnichat.Avatar">
+        <span class="o_oc_avatar" t-attf-style="background: {{ color }}; width: {{ size }}px; height: {{ size }}px; font-size: {{ size * 0.38 }}px;">
+            <img t-if="hasImage" t-att-src="src" alt="" loading="lazy"/>
+            <t t-else="" t-esc="initials"/>
+            <span t-if="letter" class="o_oc_badge" t-attf-style="background: {{ letterColor }};" t-esc="letter"/>
+        </span>
+    </t>
+
+    <t t-name="isd_omnichat.Inbox">
+        <div t-attf-class="o_omnichat {{ state.convId ? 'o_oc_has_conv' : '' }}">
+            <!-- Rail: one button per account -->
+            <nav class="o_oc_rail">
+                <button t-attf-class="o_oc_rail_item {{ !state.accountId ? 'active' : '' }}"
+                        t-on-click="() => this.selectAccount(false)" title="All accounts">
+                    <span class="o_oc_rail_all"><i class="fa fa-inbox"/></span>
+                    <span t-if="unreadTotal" class="o_oc_rail_count" t-esc="unreadTotal"/>
+                </button>
+                <div class="o_oc_rail_sep"/>
+                <div class="o_oc_rail_accounts">
+                    <t t-foreach="state.accounts" t-as="account" t-key="account.id">
+                        <button t-attf-class="o_oc_rail_item {{ state.accountId === account.id ? 'active' : '' }}"
+                                t-att-title="account.name + ' · ' + account.platform_label"
+                                t-on-click="() => this.selectAccount(account.id)">
+                            <t t-call="isd_omnichat.Avatar">
+                                <t t-set="size" t-value="44"/>
+                                <t t-set="color" t-value="account.color"/>
+                                <t t-set="hasImage" t-value="account.has_avatar"/>
+                                <t t-set="src" t-value="accountAvatar(account)"/>
+                                <t t-set="initials" t-value="account.initials"/>
+                                <t t-set="letter" t-value="account.letter"/>
+                                <t t-set="letterColor" t-value="'#0F172A'"/>
+                            </t>
+                            <span t-if="account.unread" class="o_oc_rail_count" t-esc="account.unread"/>
+                        </button>
+                    </t>
+                </div>
+                <div class="o_oc_rail_bottom">
+                    <button t-if="omnichat.sound" class="o_oc_rail_tool" t-on-click="toggleSound" title="Sound on: click to mute">
+                        <i class="fa fa-bell"/>
+                    </button>
+                    <button t-else="" class="o_oc_rail_tool o_oc_off" t-on-click="toggleSound" title="Sound off: click to turn on">
+                        <i class="fa fa-bell-slash"/>
+                    </button>
+                    <button t-if="omnichat.desktop" class="o_oc_rail_tool" t-on-click="toggleDesktop"
+                            title="Desktop notifications on: click to turn off">
+                        <i class="fa fa-desktop"/>
+                    </button>
+                    <button t-else="" class="o_oc_rail_tool o_oc_off" t-on-click="toggleDesktop"
+                            title="Desktop notifications off: click to turn on">
+                        <i class="fa fa-desktop"/>
+                    </button>
+                    <button class="o_oc_rail_tool" t-on-click="openSettings" title="Settings">
+                        <i class="fa fa-th-large"/>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Conversation list -->
+            <section class="o_oc_list">
+                <header class="o_oc_list_head">
+                    <div class="d-flex align-items-start justify-content-between gap-2">
+                        <div class="min-w-0">
+                            <h2 t-if="currentAccount" class="o_oc_title text-truncate" t-esc="currentAccount.name"/>
+                            <h2 t-else="" class="o_oc_title text-truncate">All accounts</h2>
+                            <div t-if="currentAccount" class="o_oc_subtitle text-truncate">
+                                <span class="o_oc_dot"/> <t t-esc="currentAccount.platform_label"/>
+                                <t t-if="currentAccount.subtitle"> · <t t-esc="currentAccount.subtitle"/></t>
+                                <span t-if="currentAccount.ai" class="o_oc_chip o_oc_chip_ai ms-1">AI</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 flex-shrink-0">
+                            <button t-if="currentAccount and currentAccount.seller_center_url"
+                                    class="btn btn-sm btn-light o_oc_seller" t-on-click="openSellerCenter">
+                                <i class="fa fa-shopping-bag me-1"/>Seller Center
+                            </button>
+                            <span t-if="(currentAccount ? currentAccount.unread : unreadTotal)" class="o_oc_unread_pill">
+                                <t t-esc="currentAccount ? currentAccount.unread : unreadTotal"/> unread
+                            </span>
+                        </div>
+                    </div>
+                    <div class="o_oc_search">
+                        <i class="fa fa-search"/>
+                        <input type="text" placeholder="Search name, phone, tag…" t-att-value="state.search"
+                               t-on-input="onSearch"/>
+                    </div>
+                    <div class="o_oc_filters">
+                        <t t-foreach="filters" t-as="f" t-key="f[0]">
+                            <button t-attf-class="o_oc_filter {{ state.filter === f[0] ? 'active' : '' }}"
+                                    t-on-click="() => this.setFilter(f[0])" t-esc="f[1]"/>
+                        </t>
+                    </div>
+                </header>
+                <div class="o_oc_list_body">
+                    <div t-if="!state.conversations.length" class="o_oc_empty">
+                        <i class="fa fa-comments-o fa-3x mb-2"/>
+                        <div t-if="!state.accounts.length">No account yet. Open the settings to connect one.</div>
+                        <div t-else="">No conversation here.</div>
+                    </div>
+                    <t t-foreach="state.conversations" t-as="conv" t-key="conv.id">
+                        <button t-attf-class="o_oc_conv {{ state.convId === conv.id ? 'active' : '' }} {{ conv.unread ? 'unread' : '' }}"
+                                t-on-click="() => this.openConversation(conv.id)">
+                            <t t-call="isd_omnichat.Avatar">
+                                <t t-set="size" t-value="48"/>
+                                <t t-set="color" t-value="conv.color"/>
+                                <t t-set="hasImage" t-value="conv.has_avatar"/>
+                                <t t-set="src" t-value="convAvatar(conv)"/>
+                                <t t-set="initials" t-value="conv.initials"/>
+                                <t t-set="letter" t-value="state.accountId ? false : conv.platform_letter"/>
+                                <t t-set="letterColor" t-value="conv.platform_color"/>
+                            </t>
+                            <div class="o_oc_conv_main">
+                                <div class="o_oc_conv_top">
+                                    <span class="o_oc_conv_name text-truncate" t-esc="conv.name"/>
+                                    <span class="o_oc_conv_time" t-esc="listTime(conv.last_at)"/>
+                                </div>
+                                <div class="o_oc_conv_bottom">
+                                    <span class="o_oc_conv_preview text-truncate">
+                                        <t t-if="conv.last_direction === 'out'">You: </t><t t-esc="conv.preview"/>
+                                    </span>
+                                    <span t-if="conv.unread" class="o_oc_conv_count" t-esc="conv.unread"/>
+                                </div>
+                                <div t-if="conv.tags.length or conv.mode === 'ai' or conv.state === 'done' or conv.user"
+                                     class="o_oc_conv_meta">
+                                    <span t-if="conv.mode === 'ai'" class="o_oc_chip o_oc_chip_ai">AI</span>
+                                    <span t-if="conv.state === 'done'" class="o_oc_chip o_oc_chip_done">Done</span>
+                                    <t t-foreach="conv.tags" t-as="tag" t-key="tag.id">
+                                        <span t-attf-class="o_oc_chip o_tag_color_{{ tag.color }}" t-esc="tag.name"/>
+                                    </t>
+                                    <span t-if="conv.user" class="o_oc_conv_user text-truncate"><i class="fa fa-user-o me-1"/><t t-esc="conv.user"/></span>
+                                </div>
+                            </div>
+                        </button>
+                    </t>
+                        <button t-if="state.hasMore" class="btn btn-link w-100" t-on-click="() => this.loadConversations(true)">
+                        Load more
+                    </button>
+                </div>
+            </section>
+
+            <!-- Chat -->
+            <section class="o_oc_chat">
+                <div t-if="!state.conv" class="o_oc_chat_empty">
+                    <div class="o_oc_chat_empty_icon"><i class="fa fa-comments"/></div>
+                    <h3>Omnichat</h3>
+                    <p>Pick a conversation. Type <code>\</code> in the chat box for quick replies.</p>
+                </div>
+                <t t-else="">
+                    <t t-set="conv" t-value="state.conv"/>
+                    <header class="o_oc_chat_head">
+                        <button class="btn btn-link o_oc_back" t-on-click="backToList"><i class="fa fa-arrow-left"/></button>
+                        <t t-call="isd_omnichat.Avatar">
+                            <t t-set="size" t-value="44"/>
+                            <t t-set="color" t-value="conv.color"/>
+                            <t t-set="hasImage" t-value="conv.has_avatar"/>
+                            <t t-set="src" t-value="convAvatar(conv)"/>
+                            <t t-set="initials" t-value="conv.initials"/>
+                            <t t-set="letter" t-value="conv.platform_letter"/>
+                            <t t-set="letterColor" t-value="conv.platform_color"/>
+                        </t>
+                        <div class="o_oc_chat_who">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <a href="#" class="o_oc_chat_name" t-on-click.prevent="rename" title="Rename" t-esc="conv.name"/>
+                                <t t-foreach="conv.tags" t-as="tag" t-key="tag.id">
+                                    <span t-attf-class="o_oc_chip o_tag_color_{{ tag.color }}" t-esc="tag.name"/>
+                                </t>
+                                <span t-if="conv.mode === 'ai'" class="o_oc_chip o_oc_chip_ai">AI answering</span>
+                            </div>
+                            <div class="o_oc_chat_sub text-truncate">
+                                <t t-esc="conv.account_name"/>
+                                <t t-if="conv.phone"> · <t t-esc="conv.phone"/></t>
+                                <t t-if="conv.partner_name"> · <i class="fa fa-address-card-o"/> <t t-esc="conv.partner_name"/></t>
+                            </div>
+                        </div>
+                        <div class="o_oc_chat_tools">
+                            <t t-if="conv.ai_available">
+                                <button t-if="conv.mode === 'ai'" class="btn btn-sm btn-primary" t-on-click="toggleMode"
+                                        title="AI is answering: click to take over">
+                                    <i class="fa fa-magic me-1"/>AI
+                                </button>
+                                <button t-else="" class="btn btn-sm btn-light" t-on-click="toggleMode" title="Let AI answer">
+                                    <i class="fa fa-user me-1"/>Agent
+                                </button>
+                            </t>
+                            <div class="position-relative">
+                                <button class="btn btn-sm btn-light" t-on-click="() => { state.showAssignMenu = !state.showAssignMenu; state.showTagMenu = false; }"
+                                        title="Assign">
+                                    <i class="fa fa-user-o me-1"/><t t-if="conv.user" t-esc="conv.user"/><t t-else="">Assign</t>
+                                </button>
+                                <div t-if="state.showAssignMenu" class="o_oc_menu">
+                                    <button class="o_oc_menu_item" t-on-click="() => this.assign(false)"><em>Nobody</em></button>
+                                    <t t-foreach="conv.agents" t-as="agent" t-key="agent.id">
+                                        <button t-attf-class="o_oc_menu_item {{ agent.id === conv.user_id ? 'active' : '' }}"
+                                                t-on-click="() => this.assign(agent.id)" t-esc="agent.name"/>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="position-relative">
+                                <button class="btn btn-sm btn-light" t-on-click="() => { state.showTagMenu = !state.showTagMenu; state.showAssignMenu = false; }"
+                                        title="Tags"><i class="fa fa-tag"/></button>
+                                <div t-if="state.showTagMenu" class="o_oc_menu">
+                                    <t t-foreach="conv.all_tags" t-as="tag" t-key="tag.id">
+                                        <button class="o_oc_menu_item" t-on-click="() => this.toggleTag(tag)">
+                                            <i t-attf-class="fa {{ hasTag(tag) ? 'fa-check-square-o' : 'fa-square-o' }} me-2"/>
+                                            <span t-attf-class="o_oc_chip o_tag_color_{{ tag.color }}" t-esc="tag.name"/>
+                                        </button>
+                                    </t>
+                                    <input class="form-control form-control-sm mt-1" placeholder="New tag, Enter"
+                                           t-model="state.tagInput" t-on-keydown="addTag"/>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-light" t-on-click="() => this.openAction('action_link_partner')"
+                                    title="Contact"><i class="fa fa-address-card-o"/></button>
+                            <button t-if="conv.crm" class="btn btn-sm btn-light" t-on-click="() => this.openAction('action_create_lead')"
+                                    title="CRM lead"><i t-attf-class="fa {{ conv.crm_lead_id ? 'fa-star' : 'fa-star-o' }}"/></button>
+                            <button t-if="conv.state !== 'done'" class="btn btn-sm btn-success" t-on-click="confirmDone" title="Done">
+                                <i class="fa fa-check"/>
+                            </button>
+                            <button t-else="" class="btn btn-sm btn-light" t-on-click="() => this.setState('open')" title="Reopen">
+                                <i class="fa fa-undo"/>
+                            </button>
+                        </div>
+                    </header>
+                    <div t-if="conv.window_note" class="o_oc_window_note"><i class="fa fa-clock-o me-1"/><t t-esc="conv.window_note"/></div>
+                    <div class="o_oc_thread" t-ref="thread">
+                        <button t-if="state.hasMoreMessages" class="btn btn-sm btn-light o_oc_older" t-on-click="loadOlder">
+                            Older messages
+                        </button>
+                        <t t-foreach="state.messages" t-as="message" t-key="message.id">
+                            <t t-set="day" t-value="dayLabel(message, message_index)"/>
+                            <div t-if="day" class="o_oc_day"><span t-esc="day"/></div>
+                            <div t-if="message.direction === 'note'" class="o_oc_note"><span t-esc="message.body"/></div>
+                            <div t-else="" t-attf-class="o_oc_msg o_oc_msg_{{ message.direction }} o_oc_by_{{ message.author_kind }}">
+                                <div class="o_oc_bubble">
+                                    <div t-if="message.direction === 'out' and message.author_kind !== 'agent'" class="o_oc_msg_by">
+                                        <i t-attf-class="fa {{ message.author_kind === 'bot' ? 'fa-magic' : 'fa-mobile' }} me-1"/>
+                                        <t t-esc="message.author"/>
+                                    </div>
+                                    <div t-elif="message.direction === 'out' and message.author" class="o_oc_msg_by" t-esc="message.author"/>
+                                    <div t-if="message.attachments.length" class="o_oc_files">
+                                        <t t-foreach="message.attachments" t-as="file" t-key="file.id">
+                                            <a t-if="file.is_image" t-att-href="file.url" target="_blank" class="o_oc_img">
+                                                <img t-att-src="file.url" t-att-alt="file.name" loading="lazy"/>
+                                            </a>
+                                            <a t-else="" t-att-href="file.download_url" class="o_oc_file">
+                                                <i class="fa fa-file-o me-2"/><span class="text-truncate" t-esc="file.name"/>
+                                            </a>
+                                        </t>
+                                    </div>
+                                    <div t-if="message.body" class="o_oc_text" t-esc="message.body"/>
+                                    <div class="o_oc_msg_meta">
+                                        <span t-esc="messageTime(message.date)"/>
+                                        <t t-if="message.direction === 'out'">
+                                            <i t-if="message.state === 'pending'" class="fa fa-clock-o ms-1"/>
+                                            <span t-elif="message.state === 'sent'" class="ms-1 o_oc_ticks">✓✓</span>
+                                            <i t-elif="message.state === 'failed'" class="fa fa-exclamation-circle text-danger ms-1"
+                                               t-att-title="message.error"/>
+                                        </t>
+                                    </div>
+                                </div>
+                                <div t-if="message.state === 'failed'" class="o_oc_failed">
+                                    <span class="text-truncate" t-esc="message.error"/>
+                                    <button class="btn btn-link btn-sm p-0 ms-2" t-on-click="() => this.resend(message)">Send again</button>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <footer class="o_oc_composer">
+                        <div t-if="state.qr.open and qrMatches.length" class="o_oc_qr">
+                            <div class="o_oc_qr_head">
+                                <span><i class="fa fa-bolt me-1"/>QUICK REPLIES (type \ to open)</span>
+                                <span class="text-muted">↑↓ · Enter</span>
+                            </div>
+                            <t t-foreach="qrMatches" t-as="reply" t-key="reply.id">
+                                <button t-attf-class="o_oc_qr_item {{ reply_index === state.qr.index ? 'active' : '' }}"
+                                        t-on-mousedown.prevent="() => this.applyQuickReply(reply)">
+                                    <code class="o_oc_qr_key">\<t t-esc="reply.shortcut"/></code>
+                                    <span class="o_oc_qr_body text-truncate" t-esc="reply.body"/>
+                                    <span t-if="reply.images.length" class="o_oc_qr_imgs"><i class="fa fa-camera me-1"/><t t-esc="reply.images.length"/></span>
+                                </button>
+                            </t>
+                        </div>
+                        <div t-if="state.pending.length" class="o_oc_pending">
+                            <t t-foreach="state.pending" t-as="file" t-key="file.id">
+                                <span class="o_oc_pending_item" t-att-title="file.name">
+                                    <img t-if="file.is_image" t-att-src="file.url" alt=""/>
+                                    <span t-else="" class="o_oc_pending_file"><i class="fa fa-file-o"/></span>
+                                    <button class="o_oc_pending_x" t-on-click="() => this.removePending(file.id)">×</button>
+                                </span>
+                            </t>
+                        </div>
+                        <div class="o_oc_input_row">
+                            <button class="btn btn-light o_oc_attach" t-on-click="pickFiles" t-att-disabled="state.uploading" title="Attach">
+                                <i t-attf-class="fa {{ state.uploading ? 'fa-spinner fa-spin' : 'fa-paperclip' }}"/>
+                            </button>
+                            <input type="file" class="d-none" multiple="multiple" t-ref="file" t-on-change="onFiles"/>
+                            <textarea t-ref="composer" class="o_oc_input" rows="1"
+                                      placeholder="Write a message… (type \ for quick replies)"
+                                      t-on-input="onComposerInput" t-on-keydown="onComposerKeydown"
+                                      t-on-blur="onComposerBlur"/>
+                            <button class="btn btn-primary o_oc_send" t-on-click="send"
+                                    t-att-disabled="state.sending or (!state.composer.trim() and !state.pending.length)">
+                                <i t-if="state.sending" class="fa fa-spinner fa-spin"/>
+                                <t t-else="">Send</t>
+                            </button>
+                        </div>
+                    </footer>
+                </t>
+            </section>
+        </div>
+    </t>
+
+    <t t-name="isd_omnichat.SettingsDialog">
+        <Dialog title="title" size="'lg'" contentClass="'o_oc_settings'" withBodyPadding="false">
+            <div class="o_oc_tabs">
+                <button t-if="props.isManager" t-attf-class="o_oc_tab {{ state.tab === 'accounts' ? 'active' : '' }}"
+                        t-on-click="() => state.tab = 'accounts'"><i class="fa fa-user-o me-2"/>Accounts</button>
+                <button t-attf-class="o_oc_tab {{ state.tab === 'replies' ? 'active' : '' }}"
+                        t-on-click="() => state.tab = 'replies'"><i class="fa fa-comment-o me-2"/>Quick Replies</button>
+            </div>
+            <div class="o_oc_settings_body">
+                <t t-if="state.tab === 'accounts'">
+                    <div class="d-flex justify-content-end mb-3">
+                        <button class="btn btn-primary" t-on-click="() => this.editAccount()"><i class="fa fa-plus me-1"/>Add Account</button>
+                    </div>
+                    <div t-if="!state.groups.length" class="o_oc_empty">No account yet.</div>
+                    <t t-foreach="state.groups" t-as="group" t-key="group.platform">
+                        <div class="o_oc_group">
+                            <div class="o_oc_group_head">
+                                <span class="o_oc_group_letter" t-attf-style="background: {{ group.color }}" t-esc="group.letter"/>
+                                <span class="fw-bold" t-esc="group.label"/>
+                                <span class="o_oc_group_count" t-esc="group.accounts.length"/>
+                            </div>
+                            <t t-foreach="group.accounts" t-as="account" t-key="account.id">
+                                <div t-attf-class="o_oc_account_row {{ account.hidden ? 'is-hidden' : '' }}">
+                                    <t t-call="isd_omnichat.Avatar">
+                                        <t t-set="size" t-value="44"/>
+                                        <t t-set="color" t-value="group.color"/>
+                                        <t t-set="hasImage" t-value="account.has_avatar"/>
+                                        <t t-set="src" t-value="accountAvatar(account)"/>
+                                        <t t-set="initials" t-value="account.initials"/>
+                                        <t t-set="letter" t-value="false"/>
+                                    </t>
+                                    <div class="flex-grow-1 min-w-0">
+                                        <div class="fw-semibold text-truncate">
+                                            <t t-esc="account.name"/>
+                                            <span t-if="account.hidden" class="o_oc_chip ms-1">Hidden</span>
+                                            <span t-if="account.state === 'error'" class="o_oc_chip o_oc_chip_err ms-1">Error</span>
+                                            <span t-elif="account.state === 'draft'" class="o_oc_chip ms-1">Not tested</span>
+                                        </div>
+                                        <div class="text-primary small text-truncate" t-esc="account.subtitle"/>
+                                    </div>
+                                    <button t-if="account.seller_center_url" class="btn btn-sm btn-outline-primary"
+                                            t-on-click="() => this.openSellerCenter(account)">
+                                        <i class="fa fa-shopping-bag me-1"/>Seller Center
+                                    </button>
+                                    <button class="btn btn-sm btn-link" t-on-click="() => this.editAccount(account.id)" title="Edit">
+                                        <i class="fa fa-pencil"/>
+                                    </button>
+                                    <button class="btn btn-sm btn-link text-warning" t-on-click="() => this.toggleHidden(account)"
+                                            title="Hide / show">
+                                        <i t-attf-class="fa {{ account.hidden ? 'fa-eye' : 'fa-eye-slash' }}"/>
+                                    </button>
+                                    <button class="btn btn-sm btn-link text-danger" t-on-click="() => this.deleteAccount(account)" title="Delete">
+                                        <i class="fa fa-trash-o"/>
+                                    </button>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+                <t t-else="">
+                    <h5 t-if="state.form.id" class="fw-bold mb-3">Edit quick reply</h5>
+                    <h5 t-else="" class="fw-bold mb-3">New quick reply</h5>
+                    <div class="o_oc_qr_form">
+                        <div class="o_oc_qr_form_key">
+                            <span class="o_oc_slash">\</span>
+                            <input type="text" placeholder="khuyenmai" t-att-value="state.form.shortcut" t-on-input="onShortcutInput"/>
+                            <span class="text-muted small"><t t-esc="state.form.shortcut.length"/>/<t t-esc="maxShortcut"/></span>
+                        </div>
+                        <textarea class="o_oc_qr_form_body" rows="4" t-model="state.form.body"
+                                  placeholder="Dạ chào {name}! … ({name}: customer, {agent}: you)"/>
+                        <div t-if="state.form.images.length" class="o_oc_qr_form_imgs">
+                            <t t-foreach="state.form.images" t-as="img" t-key="img.id">
+                                <span class="o_oc_pending_item">
+                                    <img t-att-src="img.url" t-att-alt="img.name"/>
+                                    <button class="o_oc_pending_x" t-on-click="() => this.removeImage(img.id)">×</button>
+                                </span>
+                            </t>
+                        </div>
+                        <div class="o_oc_qr_form_foot">
+                            <button class="btn btn-light" t-on-click="pickImages" t-att-disabled="state.form.images.length >= maxImages">
+                                <i class="fa fa-picture-o me-1"/>Add images (<t t-esc="state.form.images.length"/>/<t t-esc="maxImages"/>)
+                            </button>
+                            <input type="file" class="d-none" accept="image/*" multiple="multiple" t-ref="qrFile" t-on-change="onImages"/>
+                            <label t-if="props.isManager" class="form-check ms-2 mb-0">
+                                <input type="checkbox" class="form-check-input" t-model="state.form.shared"/>
+                                <span class="form-check-label">Shared with the team</span>
+                            </label>
+                            <div class="ms-auto d-flex gap-2">
+                                <button class="btn btn-secondary" t-on-click="cancelReply">Cancel</button>
+                                <button class="btn btn-primary" t-on-click="saveReply" t-att-disabled="state.saving">
+                                    <t t-if="state.form.id">Save</t><t t-else="">Add</t>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_oc_group mt-4">
+                        <div class="o_oc_group_head"><span class="fw-bold">Saved replies (<t t-esc="state.replies.length"/>)</span></div>
+                        <div t-if="!state.replies.length" class="p-3 text-muted">None yet.</div>
+                        <t t-foreach="state.replies" t-as="reply" t-key="reply.id">
+                            <div class="o_oc_reply_row">
+                                <code class="o_oc_qr_key">\<t t-esc="reply.shortcut"/></code>
+                                <div class="flex-grow-1 min-w-0">
+                                    <div class="o_oc_reply_body" t-esc="reply.body"/>
+                                    <div class="small mt-1">
+                                        <span t-if="reply.images.length" class="text-primary me-2"><i class="fa fa-picture-o me-1"/><t t-esc="reply.images.length"/> image(s)</span>
+                                        <span t-if="reply.shared" class="o_oc_chip">Shared</span>
+                                    </div>
+                                </div>
+                                <t t-if="canEdit(reply)">
+                                    <button class="btn btn-sm btn-outline-primary" t-on-click="() => this.editReply(reply)" title="Edit"><i class="fa fa-pencil"/></button>
+                                    <button class="btn btn-sm btn-outline-danger" t-on-click="() => this.deleteReply(reply)" title="Delete"><i class="fa fa-trash-o"/></button>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="close">Done</button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

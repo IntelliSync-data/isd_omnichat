@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_omnichat" model="ir.module.category">
+        <field name="name">Omnichat</field>
+        <field name="sequence">85</field>
+    </record>
+
+    <record id="group_omnichat_agent" model="res.groups">
+        <field name="name">Agent</field>
+        <field name="category_id" ref="module_category_omnichat"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Answers the conversations of the accounts they are assigned to.</field>
+    </record>
+
+    <record id="group_omnichat_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_omnichat"/>
+        <field name="implied_ids" eval="[(4, ref('group_omnichat_agent'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="comment">Every account and conversation; connects accounts and assigns agents.</field>
+    </record>
+
+    <!-- Agents: the accounts they are assigned to, and what belongs to them -->
+    <record id="rule_account_agent" model="ir.rule">
+        <field name="name">Omnichat accounts: assigned ones</field>
+        <field name="model_id" ref="model_omnichat_account"/>
+        <field name="domain_force">[('user_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_agent'))]"/>
+    </record>
+    <record id="rule_conversation_agent" model="ir.rule">
+        <field name="name">Omnichat conversations: of assigned accounts</field>
+        <field name="model_id" ref="model_omnichat_conversation"/>
+        <field name="domain_force">[('account_id.user_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_agent'))]"/>
+    </record>
+    <record id="rule_message_agent" model="ir.rule">
+        <field name="name">Omnichat messages: of assigned accounts</field>
+        <field name="model_id" ref="model_omnichat_message"/>
+        <field name="domain_force">[('conversation_id.account_id.user_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_agent'))]"/>
+    </record>
+    <record id="rule_quick_reply_agent_read" model="ir.rule">
+        <field name="name">Quick replies: shared ones and my own</field>
+        <field name="model_id" ref="model_omnichat_quick_reply"/>
+        <field name="domain_force">['|', ('user_id', '=', False), ('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_agent'))]"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_quick_reply_agent_write" model="ir.rule">
+        <field name="name">Quick replies: agents change their own</field>
+        <field name="model_id" ref="model_omnichat_quick_reply"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_agent'))]"/>
+        <field name="perm_read" eval="False"/>
+    </record>
+
+    <!-- Managers: everything -->
+    <record id="rule_account_manager" model="ir.rule">
+        <field name="name">Omnichat accounts: all</field>
+        <field name="model_id" ref="model_omnichat_account"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_manager'))]"/>
+    </record>
+    <record id="rule_conversation_manager" model="ir.rule">
+        <field name="name">Omnichat conversations: all</field>
+        <field name="model_id" ref="model_omnichat_conversation"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_manager'))]"/>
+    </record>
+    <record id="rule_message_manager" model="ir.rule">
+        <field name="name">Omnichat messages: all</field>
+        <field name="model_id" ref="model_omnichat_message"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_manager'))]"/>
+    </record>
+    <record id="rule_quick_reply_manager" model="ir.rule">
+        <field name="name">Quick replies: all</field>
+        <field name="model_id" ref="model_omnichat_quick_reply"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_omnichat_manager'))]"/>
+    </record>
+</odoo>

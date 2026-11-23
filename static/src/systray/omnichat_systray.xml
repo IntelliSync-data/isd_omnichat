@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="isd_omnichat.Systray">
+        <div t-if="omnichat.isAgent" class="o_omnichat_systray d-flex">
+            <a href="#" class="o_nav_entry position-relative" t-on-click.prevent="open" title="Omnichat">
+                <i class="fa fa-lg fa-commenting-o"/>
+                <span t-if="omnichat.unread" class="o_omnichat_systray_badge badge rounded-pill"
+                      t-esc="omnichat.unread > 99 ? '99+' : omnichat.unread"/>
+            </a>
+        </div>
+    </t>
+</templates>

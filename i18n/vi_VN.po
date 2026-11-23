@@ -1,0 +1,1663 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* isd_omnichat
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-23 02:08+0000\n"
+"PO-Revision-Date: 2026-11-23 02:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__handoff_label
+msgid "\"Talk to a Person\" Button"
+msgstr "Nút \"Gặp nhân viên\""
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "%(name)s (%(account)s)"
+msgstr "%(name)s (%(account)s)"
+
+#. module: isd_omnichat
+#: model_terms:ir.actions.act_window,help:isd_omnichat.action_account
+msgid ""
+"A Zalo OA, a Facebook page, a WhatsApp number, a Telegram bot, a Shopee or "
+"TikTok shop."
+msgstr "Một Zalo OA, một Fanpage Facebook, một số WhatsApp, một bot Telegram, một shop Shopee hoặc TikTok."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/quick_reply.py:0
+msgid "A quick reply takes up to %s images."
+msgstr "Mỗi tin nhắn mẫu có tối đa %s ảnh."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/quick_reply.py:0
+msgid "A shortcut is up to 20 letters, digits, - or _, without spaces."
+msgstr "Phím tắt tối đa 20 ký tự gồm chữ, số, - hoặc _, không có dấu cách."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_conversation__mode__ai
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__author_kind__bot
+msgid "AI"
+msgstr "AI"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__ai_enabled
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "AI Auto-Reply"
+msgstr "AI tự trả lời"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "AI answering"
+msgstr "AI đang trả lời"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid ""
+"AI answers until the customer taps the button or asks for a person, or an agent replies.\n"
+"                                A conversation marked Done goes back to AI with the customer's next message."
+msgstr ""
+"AI trả lời cho đến khi khách bấm nút hoặc xin gặp người, hoặc nhân viên nhắn vào.\n"
+"                                Hội thoại đã Xong sẽ quay lại cho AI khi khách nhắn tin tiếp."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "AI auto-reply is not switched on for this account."
+msgstr "Tài khoản này chưa bật AI tự trả lời."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "AI could not answer (%s); an agent takes over."
+msgstr "AI không trả lời được (%s); chuyển cho nhân viên."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "AI gave no answer."
+msgstr "AI không đưa ra câu trả lời."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "AI is answering: click to take over"
+msgstr "AI đang trả lời: bấm để tự trả lời"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_conversation__mode
+msgid "AI: AI Chatbot answers. Agent: a person answers."
+msgstr "AI: AI Chatbot trả lời. Nhân viên: người trả lời."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__api_host
+msgid "API Host"
+msgstr "API Host"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__access_token
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Access Token"
+msgstr "Access Token"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__account_id
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__account_id
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__account_id
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Accounts"
+msgstr "Tài khoản"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__active
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__active
+msgid "Active"
+msgstr "Đang hoạt động"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Add"
+msgstr "Thêm"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Add Account"
+msgstr "Thêm tài khoản"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Add images ("
+msgstr "Thêm ảnh ("
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__user_id
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_conversation__mode__human
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__author_kind__agent
+#: model:res.groups,name:isd_omnichat.group_omnichat_agent
+msgid "Agent"
+msgstr "Nhân viên"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__user_ids
+msgid "Agents"
+msgstr "Nhân viên"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__ai_available
+msgid "Ai Available"
+msgstr "Có AI"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "All accounts"
+msgstr "Tất cả tài khoản"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Answered by AI"
+msgstr "AI đang trả lời"
+
+#. module: isd_omnichat
+#: model:res.groups,comment:isd_omnichat.group_omnichat_agent
+msgid "Answers the conversations of the accounts they are assigned to."
+msgstr "Trả lời hội thoại của các tài khoản được gán."
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Any text: type the same in the Facebook app's webhook settings"
+msgstr "Chuỗi bất kỳ: nhập giống hệt trong phần webhook của app Facebook"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__app_id
+msgid "App ID"
+msgstr "App ID"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "App Key"
+msgstr "App Key"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__app_secret
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "App Secret"
+msgstr "App Secret"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "App Secret Key"
+msgstr "App Secret Key"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_search
+msgid "Archived"
+msgstr "Đã lưu trữ"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__active
+msgid "Archived: stops receiving messages"
+msgstr "Lưu trữ: ngừng nhận tin"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Assign"
+msgstr "Giao cho"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__user_id
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Assigned To"
+msgstr "Người phụ trách"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Attach"
+msgstr "Đính kèm"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__image_128
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__image_128
+msgid "Avatar"
+msgstr "Ảnh đại diện"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__body
+msgid "Body"
+msgstr "Nội dung"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Bot ID"
+msgstr "Bot ID"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Bot Token"
+msgstr "Bot Token"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__crm_lead_id
+msgid "CRM Lead"
+msgstr "Lead CRM"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "CRM lead"
+msgstr "Lead CRM"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Channel Account"
+msgstr "Tài khoản kênh"
+
+#. module: isd_omnichat
+#: model:ir.actions.act_window,name:isd_omnichat.action_account
+#: model:ir.ui.menu,name:isd_omnichat.menu_accounts
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_list
+msgid "Channel Accounts"
+msgstr "Tài khoản kênh"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_res_partner__omnichat_conversation_ids
+#: model:ir.model.fields,field_description:isd_omnichat.field_res_users__omnichat_conversation_ids
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_partner_form_omnichat
+msgid "Chats"
+msgstr "Hội thoại"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__color
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__color
+msgid "Color"
+msgstr "Màu"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__company_id
+msgid "Company"
+msgstr "Công ty"
+
+#. module: isd_omnichat
+#: model:ir.ui.menu,name:isd_omnichat.menu_config
+msgid "Configuration"
+msgstr "Cấu hình"
+
+#. module: isd_omnichat
+#: model_terms:ir.actions.act_window,help:isd_omnichat.action_account
+msgid "Connect a first account"
+msgstr "Kết nối tài khoản đầu tiên"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__state__ok
+msgid "Connected"
+msgstr "Đã kết nối"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/account.py:0
+msgid "Connected."
+msgstr "Đã kết nối."
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Connection"
+msgstr "Kết nối"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.model,name:isd_omnichat.model_res_partner
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__partner_id
+msgid "Contact"
+msgstr "Liên hệ"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__conversation_ids
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__conversation_id
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_form
+msgid "Conversation"
+msgstr "Hội thoại"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__conversation_count
+msgid "Conversation Count"
+msgstr "Số hội thoại"
+
+#. module: isd_omnichat
+#: model:ir.actions.act_window,name:isd_omnichat.action_conversation
+#: model:ir.ui.menu,name:isd_omnichat.menu_conversations
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_list
+msgid "Conversations"
+msgstr "Hội thoại"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__create_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__create_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__create_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__create_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__create_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__create_uid
+msgid "Created by"
+msgstr "Tạo bởi"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__create_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__create_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__create_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__create_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__create_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__create_date
+msgid "Created on"
+msgstr "Tạo lúc"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__author_kind__customer
+msgid "Customer"
+msgstr "Khách"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__external_user_id
+msgid "Customer ID"
+msgstr "Mã khách"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+msgid "Customer name"
+msgstr "Tên khách"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__date
+msgid "Date"
+msgstr "Ngày"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+msgid "Delete"
+msgstr "Xoá"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+msgid "Delete %s?"
+msgstr "Xoá %s?"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+msgid "Delete the quick reply \\%s?"
+msgstr "Xoá tin nhắn mẫu \\%s?"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Desktop notifications off: click to turn on"
+msgstr "Thông báo màn hình đang tắt: bấm để bật"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Desktop notifications on: click to turn off"
+msgstr "Thông báo màn hình đang bật: bấm để tắt"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__direction
+msgid "Direction"
+msgstr "Chiều"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__display_name
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__display_name
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__display_name
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__display_name
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__display_name
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_conversation__state__done
+msgid "Done"
+msgstr "Xong"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Dạ chào {name}! … ({name}: customer, {agent}: you)"
+msgstr "Dạ chào {name}! … ({name}: tên khách, {agent}: tên bạn)"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Edit"
+msgstr "Sửa"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Edit quick reply"
+msgstr "Sửa tin nhắn mẫu"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_quick_reply__user_id
+msgid "Empty: shared with the whole team"
+msgstr "Để trống: dùng chung cho cả team"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+msgid "Enter a shortcut and a message."
+msgstr "Nhập phím tắt và nội dung."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__error
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__state__error
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_webhook_log__status__error
+msgid "Error"
+msgstr "Lỗi"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_webhook_log_search
+msgid "Errors and Rejected"
+msgstr "Lỗi và bị từ chối"
+
+#. module: isd_omnichat
+#: model:res.groups,comment:isd_omnichat.group_omnichat_manager
+msgid "Every account and conversation; connects accounts and assigns agents."
+msgstr "Mọi tài khoản và hội thoại; kết nối tài khoản và gán nhân viên."
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Facebook App ID"
+msgstr "Facebook App ID"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__platform__facebook
+msgid "Facebook Page"
+msgstr "Fanpage Facebook"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__state__failed
+msgid "Failed"
+msgstr "Lỗi"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__msg_type__file
+msgid "File"
+msgstr "Tệp"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__attachment_ids
+msgid "Files"
+msgstr "Tệp"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__author_kind
+msgid "From"
+msgstr "Từ"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "From %s"
+msgstr "Từ %s"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "From @BotFather"
+msgstr "Lấy từ @BotFather"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__remote_ip
+msgid "From IP"
+msgstr "Từ IP"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__handoff_message
+msgid "Handoff Reply"
+msgstr "Câu trả lời khi chuyển nhân viên"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__hidden
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Hidden"
+msgstr "Đang ẩn"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Hide / show"
+msgstr "Ẩn / hiện"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__id
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__id
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__id
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__id
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__id
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__id
+msgid "ID"
+msgstr "ID"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_webhook_log__status__ignored
+msgid "Ignored"
+msgstr "Bỏ qua"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__msg_type__image
+msgid "Image"
+msgstr "Ảnh"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__image_count
+msgid "Image Count"
+msgstr "Số ảnh"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__image_ids
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_quick_reply_list
+msgid "Images"
+msgstr "Ảnh"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_quick_reply_form
+msgid "Images (up to 6)"
+msgstr "Ảnh (tối đa 6)"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_conversation__state__open
+msgid "In Progress"
+msgstr "Đang xử lý"
+
+#. module: isd_omnichat
+#: model:ir.actions.client,name:isd_omnichat.action_inbox
+#: model:ir.ui.menu,name:isd_omnichat.menu_inbox
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Inbox"
+msgstr "Hộp thư"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__initials
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__initials
+msgid "Initials"
+msgstr "Chữ tắt"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Install AI Chatbot (by ISD) to let AI answer new conversations."
+msgstr "Cài AI Chatbot (by ISD) để AI trả lời hội thoại mới."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "Install CRM to create leads."
+msgstr "Cài CRM để tạo lead."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+msgid ""
+"Its conversations and messages are deleted too. To keep them, hide or "
+"archive the account instead."
+msgstr "Toàn bộ hội thoại và tin nhắn của tài khoản cũng bị xoá. Muốn giữ lại thì hãy ẩn hoặc lưu trữ tài khoản."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__last_inbound_at
+msgid "Last Customer Message"
+msgstr "Tin cuối của khách"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__last_direction
+msgid "Last Direction"
+msgstr "Chiều tin cuối"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__last_error
+msgid "Last Error"
+msgstr "Lỗi gần nhất"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__last_message_preview
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_list
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Last Message"
+msgstr "Tin cuối"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__last_message_at
+msgid "Last Message At"
+msgstr "Thời gian tin cuối"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__write_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__write_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__write_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__write_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__write_uid
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__write_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__write_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__write_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__write_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__write_date
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối lúc"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Let AI answer"
+msgstr "Để AI trả lời"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Load more"
+msgstr "Xem thêm"
+
+#. module: isd_omnichat
+#: model:res.groups,name:isd_omnichat.group_omnichat_manager
+msgid "Manager"
+msgstr "Quản lý"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+msgid ""
+"Mark this conversation as done? The customer's next message opens it again."
+msgstr "Đánh dấu hội thoại đã xong? Khách nhắn tiếp thì hội thoại tự mở lại."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__body
+msgid "Message"
+msgstr "Nội dung"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__message_ids
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_form
+msgid "Messages"
+msgstr "Tin nhắn"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Messages this app sends come back as echoes; they are skipped"
+msgstr "Tin do app này gửi sẽ quay lại dạng echo; module bỏ qua chúng"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Mine"
+msgstr "Của tôi"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__mode
+msgid "Mode"
+msgstr "Chế độ"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid ""
+"More than 24 hours since the customer last wrote: the platform may refuse a "
+"reply."
+msgstr "Đã quá 24 giờ từ tin cuối của khách: nền tảng có thể từ chối tin trả lời."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__name
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__name
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_tag__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_conversation__state__new
+msgid "New"
+msgstr "Mới"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "New Address"
+msgstr "Đổi địa chỉ mới"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+msgid "New Channel Account"
+msgstr "Tài khoản kênh mới"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__ai_enabled
+msgid ""
+"New conversations are answered by AI Chatbot until the customer asks for a "
+"person or an agent replies"
+msgstr "Hội thoại mới do AI Chatbot trả lời cho đến khi khách xin gặp người hoặc nhân viên nhắn vào"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/systray/omnichat_service.js:0
+msgid "New message"
+msgstr "Tin nhắn mới"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "New quick reply"
+msgstr "Tạo tin nhắn nhanh"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "New tag, Enter"
+msgstr "Nhãn mới, nhấn Enter"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "No account yet."
+msgstr "Chưa có tài khoản."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "No account yet. Open the settings to connect one."
+msgstr "Chưa có tài khoản. Mở Cài đặt để kết nối."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "No conversation here."
+msgstr "Không có hội thoại nào."
+
+#. module: isd_omnichat
+#: model_terms:ir.actions.act_window,help:isd_omnichat.action_quick_reply
+msgid "No quick reply yet"
+msgstr "Chưa có tin nhắn mẫu"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Nobody"
+msgstr "Không ai"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "None yet."
+msgstr "Chưa có."
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Not Done"
+msgstr "Chưa xong"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__state__draft
+msgid "Not Tested"
+msgstr "Chưa kiểm tra"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "Not delivered"
+msgstr "Không gửi tới được"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+msgid "Not sent"
+msgstr "Chưa gửi được"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__hidden
+msgid "Not shown in the inbox, still receives messages"
+msgstr "Không hiện trong hộp thư, vẫn nhận tin"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Not tested"
+msgstr "Chưa kiểm tra"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__note
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__direction__note
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "OA Access Token"
+msgstr "OA Access Token"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "OA ID"
+msgstr "OA ID"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__external_id
+msgid "OA ID, page ID, WhatsApp phone number ID, bot ID or shop ID"
+msgstr "OA ID, Page ID, Phone Number ID của WhatsApp, Bot ID hoặc Shop ID"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "OA Secret Key"
+msgstr "OA Secret Key"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Older messages"
+msgstr "Tin cũ hơn"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: code:addons/isd_omnichat/static/src/systray/omnichat_systray.xml:0
+#: model:ir.module.category,name:isd_omnichat.module_category_omnichat
+#: model:ir.ui.menu,name:isd_omnichat.menu_root
+msgid "Omnichat"
+msgstr "Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model,name:isd_omnichat.model_omnichat_account
+msgid "Omnichat Account"
+msgstr "Tài khoản Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model,name:isd_omnichat.model_omnichat_conversation
+msgid "Omnichat Conversation"
+msgstr "Hội thoại Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_res_partner__omnichat_conversation_count
+#: model:ir.model.fields,field_description:isd_omnichat.field_res_users__omnichat_conversation_count
+msgid "Omnichat Conversation Count"
+msgstr "Số hội thoại Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_res_users__omnichat_desktop
+msgid "Omnichat Desktop Notifications"
+msgstr "Thông báo màn hình Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model,name:isd_omnichat.model_omnichat_message
+msgid "Omnichat Message"
+msgstr "Tin nhắn Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model,name:isd_omnichat.model_omnichat_quick_reply
+msgid "Omnichat Quick Reply"
+msgstr "Tin nhắn mẫu Omnichat"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/settings_dialog.js:0
+msgid "Omnichat Settings"
+msgstr "Cài đặt Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_res_users__omnichat_sound
+msgid "Omnichat Sound"
+msgstr "Âm báo Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model,name:isd_omnichat.model_omnichat_tag
+msgid "Omnichat Tag"
+msgstr "Nhãn Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.model,name:isd_omnichat.model_omnichat_webhook_log
+msgid "Omnichat Webhook Log"
+msgstr "Log webhook Omnichat"
+
+#. module: isd_omnichat
+#: model:ir.actions.server,name:isd_omnichat.cron_refresh_tokens_ir_actions_server
+msgid "Omnichat: refresh channel tokens"
+msgstr "Omnichat: làm mới token các kênh"
+
+#. module: isd_omnichat
+#: model:ir.model.constraint,message:isd_omnichat.constraint_omnichat_conversation_customer_unique
+msgid "One conversation per customer and account."
+msgstr "Mỗi khách trên mỗi tài khoản chỉ có một hội thoại."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/message.py:0
+msgid "Only a failed message can be sent again."
+msgstr "Chỉ gửi lại được tin bị lỗi."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+msgid "Open"
+msgstr "Đang mở"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_form
+msgid "Open in Inbox"
+msgstr "Mở trong Hộp thư"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_list
+msgid "Open in the inbox"
+msgstr "Mở trong hộp thư"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__seller_center_url
+msgid "Opened by the \"Seller Center\" button, for Shopee and TikTok Shop"
+msgstr "Mở khi bấm nút \"Kênh Bán\", dành cho Shopee và TikTok Shop"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__user_id
+msgid "Owner"
+msgstr "Chủ sở hữu"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_quick_reply_list
+msgid "Owner (empty: shared)"
+msgstr "Chủ sở hữu (trống: dùng chung)"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Page Access Token"
+msgstr "Page Access Token"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Page ID"
+msgstr "Page ID"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Partner ID"
+msgstr "Partner ID"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Partner Key"
+msgstr "Partner Key"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid ""
+"Paste this address into the platform's developer settings\n"
+"                                <span invisible=\"platform != 'telegram'\">(Telegram: \"Test Connection\" registers it for you)</span>."
+msgstr ""
+"Dán địa chỉ này vào phần cài đặt cho nhà phát triển của nền tảng\n"
+"                                <span invisible=\"platform != 'telegram'\">(Telegram: bấm \"Kiểm tra kết nối\" là tự đăng ký)</span>."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__payload
+msgid "Payload"
+msgstr "Dữ liệu"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__phone
+msgid "Phone"
+msgstr "Điện thoại"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Phone Number ID"
+msgstr "Phone Number ID"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Pick a conversation. Type"
+msgstr "Chọn một hội thoại. Gõ"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__platform
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__platform
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__platform
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_search
+msgid "Platform"
+msgstr "Nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__author_kind__app
+msgid "Platform App"
+msgstr "App của nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__platform_color
+msgid "Platform Color"
+msgstr "Màu nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__external_conversation_id
+msgid "Platform Conversation"
+msgstr "Mã hội thoại trên nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__external_id
+msgid "Platform ID"
+msgstr "Mã trên nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__platform_letter
+msgid "Platform Letter"
+msgstr "Ký hiệu nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__external_id
+msgid "Platform Message ID"
+msgstr "Mã tin trên nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_webhook_log__status__processed
+msgid "Processed"
+msgstr "Đã xử lý"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "QUICK REPLIES (type \\ to open)"
+msgstr "TIN NHẮN NHANH (gõ \\ để mở)"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.actions.act_window,name:isd_omnichat.action_quick_reply
+#: model:ir.ui.menu,name:isd_omnichat.menu_quick_replies
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_quick_reply_list
+msgid "Quick Replies"
+msgstr "Tin nhắn mẫu"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_quick_reply_form
+msgid "Quick Reply"
+msgstr "Tin nhắn mẫu"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_conversation__last_direction__in
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__direction__in
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__state__received
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_webhook_log__status__received
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_webhook_log_form
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_webhook_log_list
+msgid "Received"
+msgstr "Đã nhận"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__refresh_token
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Refresh Token"
+msgstr "Refresh Token"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_webhook_log__status__rejected
+msgid "Rejected"
+msgstr "Bị từ chối"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Rename"
+msgstr "Đổi tên"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Renew Token"
+msgstr "Làm mới token"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Reopen"
+msgstr "Mở lại"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Save"
+msgstr "Lưu"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Saved replies ("
+msgstr "Kho lưu trữ mẫu ("
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Search name, phone, tag…"
+msgstr "Tìm hội thoại, SĐT, nhãn…"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Secret Token"
+msgstr "Secret Token"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__seller_center_url
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Seller Center"
+msgstr "Kênh Bán"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Send"
+msgstr "Gửi"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Send again"
+msgstr "Gửi lại"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__state__pending
+msgid "Sending"
+msgstr "Đang gửi"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_conversation__last_direction__out
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__direction__out
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__state__sent
+msgid "Sent"
+msgstr "Đã gửi"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__away_message
+msgid ""
+"Sent instead of an AI answer when AI cannot answer (no credit, an error)"
+msgstr "Gửi thay câu trả lời của AI khi AI không trả lời được (hết credit, lỗi)"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__sequence
+msgid "Sequence"
+msgstr "Thứ tự"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/account.py:0
+msgid "Set the Seller Center address first."
+msgstr "Hãy nhập địa chỉ Kênh Bán trước."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Settings"
+msgstr "Cài đặt"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Shared"
+msgstr "Dùng chung"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Shared with the team"
+msgstr "Dùng chung cho team"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "Shop"
+msgstr "Shop"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__shop_cipher
+msgid "Shop Cipher"
+msgstr "Shop Cipher"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Shop ID"
+msgstr "Shop ID"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__platform__shopee
+msgid "Shopee"
+msgstr "Shopee"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__api_host
+msgid ""
+"Shopee only: leave empty for the live API, or the test host while testing"
+msgstr "Chỉ cho Shopee: để trống để dùng API thật, hoặc nhập host test khi đang thử"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_quick_reply__shortcut
+msgid "Shortcut"
+msgstr "Phím tắt"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__subtitle
+msgid ""
+"Shown under the name in the settings, e.g. the phone number or @username"
+msgstr "Hiện dưới tên trong Cài đặt, ví dụ số điện thoại hoặc @username"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Sound off: click to turn on"
+msgstr "Âm báo đang tắt: bấm để bật"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Sound on: click to mute"
+msgstr "Âm báo đang bật: bấm để tắt"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__state
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__state
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__state
+msgid "State"
+msgstr "Trạng thái"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_webhook_log__status
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Status"
+msgstr "Trạng thái"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__msg_type__sticker
+msgid "Sticker"
+msgstr "Sticker"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+msgid "Still not sent"
+msgstr "Vẫn chưa gửi được"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__subtitle
+msgid "Subtitle"
+msgstr "Dòng phụ"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/account.py:0
+msgid "Sure, a member of our team will reply to you shortly."
+msgstr "Dạ vâng, nhân viên sẽ trả lời bạn ngay ạ."
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__author_kind__system
+msgid "System"
+msgstr "Hệ thống"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+#: model:ir.actions.act_window,name:isd_omnichat.action_tag
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__tag_ids
+#: model:ir.ui.menu,name:isd_omnichat.menu_tags
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_tag_list
+msgid "Tags"
+msgstr "Nhãn"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/account.py:0
+msgid "Talk to a person"
+msgstr "Gặp nhân viên"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__platform__telegram
+msgid "Telegram"
+msgstr "Telegram"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Test Connection"
+msgstr "Kiểm tra kết nối"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_message__msg_type__text
+msgid "Text"
+msgstr "Văn bản"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__handoff_label
+msgid ""
+"The button under AI replies. Typing it, or asking for a person, hands the "
+"conversation to an agent."
+msgstr "Nút dưới câu trả lời của AI. Khách bấm nút, gõ đúng chữ này hoặc xin gặp người thì hội thoại chuyển cho nhân viên."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/account.py:0
+msgid "The connection failed: %s"
+msgstr "Kết nối thất bại: %s"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "The customer asked for a person."
+msgstr "Khách xin gặp nhân viên."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_conversation__external_user_id
+msgid "The customer's id on the platform"
+msgstr "Mã của khách trên nền tảng"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__name
+msgid "The name agents see, e.g. \"Zalo Kinh Doanh 1\""
+msgstr "Tên nhân viên nhìn thấy, ví dụ \"Zalo Kinh Doanh 1\""
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "The old address stops working. Continue?"
+msgstr "Địa chỉ cũ sẽ ngừng hoạt động. Tiếp tục?"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/quick_reply.py:0
+msgid "The shortcut \\%s is already used."
+msgstr "Phím tắt \\%s đã được dùng."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/account.py:0
+msgid ""
+"The token could not be renewed. Check the app credentials and refresh token."
+msgstr "Không làm mới được token. Kiểm tra lại thông tin app và refresh token."
+
+#. module: isd_omnichat
+#: model:ir.model.constraint,message:isd_omnichat.constraint_omnichat_account_webhook_token_unique
+msgid "The webhook address must be unique."
+msgstr "Địa chỉ webhook không được trùng."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "This file cannot be sent from here."
+msgstr "Không gửi được tệp này từ đây."
+
+#. module: isd_omnichat
+#: model:ir.model.constraint,message:isd_omnichat.constraint_omnichat_tag_name_unique
+msgid "This tag already exists."
+msgstr "Nhãn này đã có."
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__platform__tiktok
+msgid "TikTok Shop"
+msgstr "TikTok Shop"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+msgid "Today"
+msgstr "Hôm nay"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__token_expires_at
+msgid "Token Expires At"
+msgstr "Token hết hạn lúc"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_message__msg_type
+msgid "Type"
+msgstr "Loại"
+
+#. module: isd_omnichat
+#: model_terms:ir.actions.act_window,help:isd_omnichat.action_quick_reply
+msgid "Type \\shortcut in the chat box to send its text and up to 6 images."
+msgstr "Gõ \\phimtat trong ô chat để gửi nội dung và tối đa 6 ảnh."
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_quick_reply__shortcut
+msgid "Typed after \\ in the chat box. Up to 20 letters, digits, - or _."
+msgstr "Gõ sau dấu \\ trong ô chat. Tối đa 20 ký tự gồm chữ, số, - hoặc _."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_conversation_search
+msgid "Unread"
+msgstr "Chưa đọc"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_conversation__unread_count
+msgid "Unread Count"
+msgstr "Số chưa đọc"
+
+#. module: isd_omnichat
+#: model:ir.model,name:isd_omnichat.model_res_users
+msgid "User"
+msgstr "Người dùng"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Verify Token"
+msgstr "Verify Token"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Webhook"
+msgstr "Webhook"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_webhook_log_form
+msgid "Webhook Log"
+msgstr "Log webhook"
+
+#. module: isd_omnichat
+#: model:ir.actions.act_window,name:isd_omnichat.action_webhook_log
+#: model:ir.ui.menu,name:isd_omnichat.menu_webhook_logs
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_webhook_log_list
+msgid "Webhook Logs"
+msgstr "Log webhook"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__webhook_secret
+msgid "Webhook Secret"
+msgstr "Webhook Secret"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__webhook_token
+msgid "Webhook Token"
+msgstr "Webhook Token"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Webhook URL"
+msgstr "Webhook URL"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__webhook_url
+msgid "Webhook Url"
+msgstr "Webhook URL"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid ""
+"Webhook settings of the Zalo app: checks that each event comes from Zalo"
+msgstr "Trong phần Webhook của app Zalo: dùng để kiểm tra sự kiện đúng là do Zalo gửi"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__platform__whatsapp
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,field_description:isd_omnichat.field_omnichat_account__away_message
+msgid "When No Agent Can Reply"
+msgstr "Khi AI không trả lời được"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_account__user_ids
+msgid "Who sees and answers this account. Managers see every account."
+msgstr "Ai thấy và trả lời tài khoản này. Quản lý thấy mọi tài khoản."
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "Write a message or add a file."
+msgstr "Hãy nhập tin nhắn hoặc đính kèm tệp."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "Write a message… (type \\ for quick replies)"
+msgstr "Nhập tin nhắn… (gõ \\ để dùng tin nhắn nhanh)"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.js:0
+msgid "Yesterday"
+msgstr "Hôm qua"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "You:"
+msgstr "Bạn:"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "Zalo App ID"
+msgstr "Zalo App ID"
+
+#. module: isd_omnichat
+#: model:ir.model.fields.selection,name:isd_omnichat.selection__omnichat_account__platform__zalo
+msgid "Zalo OA"
+msgstr "Zalo OA"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "[File]"
+msgstr "[Tệp]"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "[Image]"
+msgstr "[Hình ảnh]"
+
+#. module: isd_omnichat
+#. odoo-python
+#: code:addons/isd_omnichat/models/conversation.py:0
+msgid "[Sticker]"
+msgstr "[Sticker]"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "e.g. +84 909 888 999, @shop_bot"
+msgstr "ví dụ +84 909 888 999, @shop_bot"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_quick_reply_form
+msgid "e.g. Dạ chào {name}! ..."
+msgstr "ví dụ Dạ chào {name}! ..."
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "e.g. Zalo Kinh Doanh 1"
+msgstr "ví dụ Zalo Kinh Doanh 1"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_quick_reply_form
+msgid "e.g. xinchao"
+msgstr "ví dụ xinchao"
+
+#. module: isd_omnichat
+#: model_terms:ir.ui.view,arch_db:isd_omnichat.view_account_form
+msgid "https://partner.shopeemobile.com"
+msgstr "https://partner.shopeemobile.com"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "image(s)"
+msgstr "ảnh"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "in the chat box for quick replies."
+msgstr "trong ô chat để dùng tin nhắn nhanh."
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "khuyenmai"
+msgstr "khuyenmai"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "unread"
+msgstr "chưa đọc"
+
+#. module: isd_omnichat
+#: model:ir.model.fields,help:isd_omnichat.field_omnichat_quick_reply__body
+msgid "{name} becomes the customer name, {agent} the agent name"
+msgstr "{name} thành tên khách, {agent} thành tên nhân viên"
+
+#. module: isd_omnichat
+#. odoo-javascript
+#: code:addons/isd_omnichat/static/src/inbox/inbox.xml:0
+msgid "↑↓ · Enter"
+msgstr "↑↓ · Enter"
