@@ -1,0 +1,91 @@
+name: Update ISD Omnichat BloomPod
+
+on:
+  push:
+    branches:
+      - bloompod
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy isd_omnichat to Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.BLOOMPOD_HOST }}
+        username: ${{ secrets.BLOOMPOD_USERNAME }}
+        key: ${{ secrets.BLOOMPOD_SSH_KEY }}
+        script_stop: true
+        script: |
+          # The repo is the module itself: the clone stays in addons-system,
+          # outside the addons path, and only the module is copied over
+          if [ ! -d ~/addons-system/isd_omnichat/.git ]; then
+            mkdir -p ~/addons-system
+            git clone --branch bloompod git@github.com:IntelliSync-data/isd_omnichat.git ~/addons-system/isd_omnichat
+          else
+            cd ~/addons-system/isd_omnichat
+            git fetch origin && git reset --hard origin/bloompod
+          fi
+
+          # Sync into custom-addons (including deletions)
+          sudo mkdir -p ~/custom-addons/isd_omnichat
+          sudo rsync -a --delete --delete-excluded \
+            --exclude='.git' --exclude='.github' --exclude='__pycache__' \
+            ~/addons-system/isd_omnichat/ ~/custom-addons/isd_omnichat/
+
+    - name: Update isd_omnichat Module
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.BLOOMPOD_HOST }}
+        username: ${{ secrets.BLOOMPOD_USERNAME }}
+        key: ${{ secrets.BLOOMPOD_SSH_KEY }}
+        script: |
+          # -u FIRST: a new version may add columns; any other command that loads
+          # the registry before -u can fail on the missing column.
+          # A module that is not installed yet is skipped by -u: install it once from Apps
+          echo "Updating isd_omnichat module..."
+          sudo -u ubuntu /odoo-venv/bin/python /odoo18/odoo-bin -c /odoo.conf -d ${{ secrets.BLOOMPOD_DB_NAME }} -u isd_omnichat --stop-after-init --no-http
+          if [ $? -ne 0 ]; then
+            echo "Module update FAILED, last lines of the Odoo log:"
+            sudo tail -n 60 /var/log/odoo/odoo.log
+            exit 1
+          fi
+
+          echo "Updating apps list..."
+          echo "env['ir.module.module'].update_list(); env.cr.commit()" | sudo -u ubuntu /odoo-venv/bin/python /odoo18/odoo-bin shell -c /odoo.conf -d ${{ secrets.BLOOMPOD_DB_NAME }} --no-http
+          if [ $? -ne 0 ]; then
+            echo "update_list() FAILED"
+            exit 1
+          fi
+
+    - name: Restart Odoo Service
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.BLOOMPOD_HOST }}
+        username: ${{ secrets.BLOOMPOD_USERNAME }}
+        key: ${{ secrets.BLOOMPOD_SSH_KEY }}
+        script: |
+          sudo systemctl restart odoo
+
+    - name: Verify Odoo Service
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.BLOOMPOD_HOST }}
+        username: ${{ secrets.BLOOMPOD_USERNAME }}
+        key: ${{ secrets.BLOOMPOD_SSH_KEY }}
+        script: |
+          sleep 5
+          if sudo systemctl is-active --quiet odoo; then
+            echo "Odoo restarted successfully"
+          else
+            echo "Odoo failed to restart"
+            echo "=== systemctl status ==="
+            sudo systemctl status odoo --no-pager
+            echo "=== Last 50 lines of Odoo log ==="
+            sudo tail -n 50 /var/log/odoo/odoo.log
+            exit 1
+          fi
